@@ -46,7 +46,7 @@
             <div class="element-actions">
             </div>
             <div class="card-header bg-info page-head-title-wrap">
-                <h4 class="page-head-title card-title  text-white" style="display: inline-block"> Lead Source <small> - Master</small></h4>
+                <h4 class="page-head-title card-title  text-white" style="display: inline-block"> Grocery items <small> - Master</small></h4>
             </div>
             <div class="element-box">
                 <!-- Nav tabs -->
