@@ -28,7 +28,7 @@ class Master_lead_type_con extends CI_Controller
 
     public function leades_list(){
 
-        $select="asms_m_lead_type.id,code,name ,asms_m_lead_type.id AS sub_id";
+        $select="asms_m_lead_type.id,code,name,quentity ,asms_m_lead_type.id AS sub_id";
         $action="<a href='javascript:;' onclick='edit_lead(".'$1'.")'><i class='fa fa-pencil' title='Edit lead'></i></a>&nbsp;
         <a href='javascript:;' onclick='view_lead(".'$1'.")'><i class='fa fa-eye' title='View lead'></i></a>&nbsp;";
         $unset_column="sub_id";
@@ -38,7 +38,7 @@ class Master_lead_type_con extends CI_Controller
 
     public function get_lead(){
         $val=$this->input->post();
-        $select="id,code,name ";
+        $select="id,code,name,quentity ";
         $where=$this->table.".id=".$val['id'];
         $lead=$this->kcrud->getValueOne($this->table,$select,$where,null,null,null,null);
         echo json_encode(array('lead'=>$lead));
@@ -48,6 +48,7 @@ class Master_lead_type_con extends CI_Controller
 
         $this->form_validation->set_rules("code","Code","trim|required|is_unique[asms_m_lead_type.code]");
         $this->form_validation->set_rules("name","Name","trim|required[asms_m_lead_type.name ]");
+        $this->form_validation->set_rules("quentity","Quentity","trim|required|numeric[asms_m_lead_type.quentity ]");
         
 
         if($this->form_validation->run() == false){
@@ -67,6 +68,11 @@ class Master_lead_type_con extends CI_Controller
                 $data["input_error"][] ="name";
                 $data["error_string"][]=form_error("name");
             }
+            if(form_error("quentity")){
+
+                $data["input_error"][] ="quentity";
+                $data["error_string"][]=form_error("quentity");
+            }
 
             echo json_encode($data);
             exit();
@@ -77,7 +83,8 @@ class Master_lead_type_con extends CI_Controller
             
             $data=array(
                 'code'=>$val['code'],
-                'name'=>$val['name']
+                'name'=>$val['name'],
+                'quentity'=>$val['quentity']
             );
 
             if($insert_id=$this->kcrud->save($this->table,$data)){
@@ -113,6 +120,8 @@ class Master_lead_type_con extends CI_Controller
         
         $this->form_validation->set_rules('code', 'Code', 'trim|required' . $is_code_unique);
         $this->form_validation->set_rules('name', 'Name', 'trim|required' );
+        $this->form_validation->set_rules('quentity', 'Quentity', 'trim|required|numeric' );
+
 
         if($this->form_validation->run() == false){
 
@@ -131,6 +140,11 @@ class Master_lead_type_con extends CI_Controller
                 $data["input_error"][] ="name";
                 $data["error_string"][]=form_error("name");
             }
+            if(form_error("quentity")){
+
+                $data["input_error"][] ="quentity";
+                $data["error_string"][]=form_error("quentity");
+            }
 
             echo json_encode($data);
             exit();
@@ -141,7 +155,8 @@ class Master_lead_type_con extends CI_Controller
 
             $data=array(
                 'code'=>$val['code'],
-                'name '=>$val['name']
+                'name '=>$val['name'],
+                'quentity'=>$val['quentity']
             );
 
             if($insert_id=$this->kcrud->update($this->table,$data,array('id'=>$val['id']))){
@@ -163,7 +178,7 @@ class Master_lead_type_con extends CI_Controller
 
         // var_dump($id);
         // die();
-        $select="id,code,name ";
+        $select="id,code,name,quentity ";
 
         $where=$this->table.".id=".$id;
         $lead=$this->kcrud->getValueOne($this->table,$select,$where,null,null,null,null);

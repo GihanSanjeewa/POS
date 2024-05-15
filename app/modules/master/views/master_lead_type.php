@@ -34,7 +34,7 @@
         <div class="d-flex justify-content-end align-items-center">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="javascript:;">Master</a></li>
-                <li class="breadcrumb-item active">Lead Type</li>
+                <li class="breadcrumb-item active">Hardware Items</li>
             </ol>
         </div>
     </div>
@@ -46,24 +46,25 @@
             <div class="element-actions">
             </div>
             <div class="card-header bg-info page-head-title-wrap">
-                <h4 class="page-head-title card-title  text-white" style="display: inline-block"> Lead Type <small> - Master</small></h4>
+                <h4 class="page-head-title card-title  text-white" style="display: inline-block"> Hardware Items <small> - Master</small></h4>
             </div>
             <div class="element-box">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist">
-                    <li class="nav-item"><a class="nav-link active" role="tab" href="#pending" data-toggle="tab"> Lead Type</a></li>
+                    <li class="nav-item"><a class="nav-link active" role="tab" href="#pending" data-toggle="tab"> Hardware Items</a></li>
                     
                 </ul>
                 <!-- Tab panes -->
                 <div class="tab-content tabcontent-border">
                 <div class="tab-pane p-20 active" role="tabpanel" id="pending">
-                        <button type="button" onclick="add_lead()" class="btn btn-success pull-right"><i class="fa fa-plus"></i> New Lead Type</button>
+                        <button type="button" onclick="add_lead()" class="btn btn-success pull-right"><i class="fa fa-plus"></i> New Hardware Items</button>
                         <table class="table table-striped table-bordered table-hover table-header-fixed dt-responsive" id="LeadInfo" cellspacing="0" width="100%">
                             <thead>
                             <tr>
                                 <th class="all" style="width: 30px">#</th>
                                 <th class="all">Code</th>
                                 <th class="all">Name</th>
+                                <th class="all">Quentity</th>
                                 <th class="all text-center">Actions</th>
                             </tr>
                             </thead>
@@ -99,6 +100,14 @@
                                                     <label class="control-label col-md-4" for="name" style='text-align: right;color:black;'><b>Name :</b></label>
                                                     <div class="col-md-6">
                                                         <input type="text" name="name" id="name" class="form-control" placeholder="Enter Name">
+                                                        <span class="error-block"></span>
+                                                    </div>
+                                                </div>
+                                                <br>
+                                                <div class="row">
+                                                    <label class="control-label col-md-4" for="quentity" style='text-align: right;color:black;'><b>Quentity :</b></label>
+                                                    <div class="col-md-6">
+                                                        <input type="text" name="quentity" id="quentity" class="form-control" placeholder="Enter Quentity">
                                                         <span class="error-block"></span>
                                                     </div>
                                                 </div>
@@ -174,6 +183,7 @@ $(document).ready(function(){
                 "orderable": false //set not orderable
             }
         ],"aoColumns": [
+            null,
             null,
             null,
             null,
@@ -301,6 +311,8 @@ function edit_lead(id){
             $('[name="id"]').val(data.lead.id);
             $('[name="code"]').val(data.lead.code);
             $('[name="name"]').val(data.lead.name);
+            $('[name="quentity"]').val(data.lead.quentity);
+
 
             $('#lead_modal_title').html('Edit lead Info '+data.lead.name);
             $('#lead_modal').modal({backdrop: 'static', keyboard: false});
@@ -411,6 +423,9 @@ function view_lead(id){
                 '<td valign="top"><label>Name</label></td>' +
                 '<td>' +(data.lead.name ? data.lead.name:"No Name")+'</td>' +
                 '</tr>' +
+                '</tr>' +
+                '<td valign="top"><label>Quentity</label></td>' +
+                '<td>' +(data.lead.quentity ? data.lead.quentity:"No Quentity")+'</td>' +
                 '</tbody>';
 
             $('#view_lead').html(html);
